@@ -4,9 +4,7 @@ const pako = require('pako');
 
 class Crypto {
   key: String;
-
   vector: String;
-
   salt: String;
 
   static interation() {
@@ -22,23 +20,9 @@ class Crypto {
   }
 
   constructor(key, vector, salt) {
-    if (key) {
-      this.key = key;
-    } else {
-      this.key = Crypto.getRandomBytes(32);
-    }
-
-    if (vector) {
-      this.vector = vector;
-    } else {
-      this.vector = Crypto.getRandomBytes(16);
-    }
-
-    if (salt) {
-      this.salt = salt;
-    } else {
-      this.salt = Crypto.getRandomBytes(8);
-    }
+    this.key = key ?? Crypto.getRandomBytes(32);
+    this.vector = vector ?? Crypto.getRandomBytes(16);
+    this.salt = salt ?? Crypto.getRandomBytes(8);
   }
 
   async crypt(text, password) {
