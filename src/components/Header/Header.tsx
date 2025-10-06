@@ -29,13 +29,11 @@ const IkHeader: FC<Props> = ({ bridge }) => {
         new Error(response.statusText),
       )))
       .then((json) => {
-        if (json.data.user) {
-          if (json.data.user.locale) {
-            window.CONST_LANG = json.data.user.locale.substr(0, 2);
-            i18n.changeLanguage(json.data.user.locale.substr(0, 2));
-          }
-          setSession(json.data);
+        if (json?.data?.user?.locale) {
+          window.CONST_LANG = json.data.user.locale.substr(0, 2);
+          i18n.changeLanguage(json.data.user.locale.substr(0, 2));
         }
+        setSession(json?.data);
       });
   }, []);
 

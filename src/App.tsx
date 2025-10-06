@@ -30,9 +30,7 @@ const App: FC = () => {
     }).then((response) => (response.ok
       ? response.json()
       : Promise.reject(new Error(response.statusText))))
-      .then((data) => {
-        return data.data;
-      });
+      .then((data) => data.data);
   }
 
   useEffect(() => {

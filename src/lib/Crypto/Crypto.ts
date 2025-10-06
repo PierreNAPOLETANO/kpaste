@@ -28,23 +28,9 @@ export class Crypto implements ICrypto{
   }
 
   constructor(key?: string, vector?: string, salt?: string) {
-    if (key) {
-      this.key = key;
-    } else {
-      this.key = Crypto.getRandomBytes(32);
-    }
-
-    if (vector) {
-      this.vector = vector;
-    } else {
-      this.vector = Crypto.getRandomBytes(16);
-    }
-
-    if (salt) {
-      this.salt = salt;
-    } else {
-      this.salt = Crypto.getRandomBytes(8);
-    }
+    this.key = key ?? Crypto.getRandomBytes(32);
+    this.vector = vector ?? Crypto.getRandomBytes(16);
+    this.salt = salt ?? Crypto.getRandomBytes(8);
   }
 
   async crypt(text: string, password:string) {
@@ -105,13 +91,9 @@ export class Crypto implements ICrypto{
     );
   }
 
-  static stringToArraybuffer(message: string) {
-    let i;
-    const messageArray = new Uint8Array(message.length);
-    for (i = 0; i < message.length; i += 1) {
-      messageArray[i] = message.charCodeAt(i);
-    }
-    return messageArray;
+  static stringToArraybuffer(message: string) {   
+    const charCodes = Array.from(message, char => char.charCodeAt(0));
+    return new Uint8Array(charCodes);
   }
 
   static utf16To8(message: string) {
@@ -142,6 +124,7 @@ export class Crypto implements ICrypto{
     );
   }
 
+  
   static arraybufferToString(messageArray: ArrayBuffer) {
     let i;
     const array = new Uint8Array(messageArray);

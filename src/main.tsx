@@ -11,11 +11,10 @@ import de from 'javascript-time-ago/locale/de';
 import it from 'javascript-time-ago/locale/it';
 import es from 'javascript-time-ago/locale/es';
 
-JavascriptTimeAgo.addLocale(en);
-JavascriptTimeAgo.addLocale(fr);
-JavascriptTimeAgo.addLocale(de);
-JavascriptTimeAgo.addLocale(it);
-JavascriptTimeAgo.addLocale(es);
+const supportedLocales = { en, fr, de, it, es };
+
+Object.values(supportedLocales).forEach(locale => JavascriptTimeAgo.addLocale(locale));
+
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
